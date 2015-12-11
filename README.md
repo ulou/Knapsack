@@ -1,6 +1,6 @@
-# Knapsack algorithm
-- [ ] a task list item
-- [ ] list syntax required
-- [ ] normal **formatting**, @mentions, #1234 refs
-- [ ] incomplete
-- [x] completed
+## Knapsack algorithm
+
+#ToDo list
+- [x] Implement Branch & Bound algorithm
+- [ ] Implement Dynamic algorithm
+- [ ] Clean up code

@@ -24,7 +24,7 @@ public class Main {
         return Colors.CYAN + "It took " + Long.toString(Time()) + " [ms]." + Colors.RESET; // print execution time
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         final int capacity = 10;
         int[] weight = {7, 8, 6, 4, 3, 9};
@@ -42,12 +42,9 @@ public class Main {
         Knapsack bag = new Knapsack(weight, value, capacity);
         BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
 
-        bag.sort();
-
         timer.start();
         bnb.solve();
         timer.stop();
-
 
         System.out.println(timer.end());
     }

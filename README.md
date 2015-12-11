@@ -4,5 +4,5 @@
 - [x] Implement Branch & Bound algorithm
 - [ ] Implement Dynamic algorithm
 - [ ] Create read from file method
-- [ ] Clean up code
+- [x] Clean up code
 - [x] Order files

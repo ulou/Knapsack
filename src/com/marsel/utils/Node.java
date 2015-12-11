@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Marcel on 11.12.2015.
  */
-public class Node implements Comparable<Node>{
+public class Node implements Comparable<Node> {
     public int level;
     public List<Item> takenItems;
     public int value;
@@ -25,7 +25,7 @@ public class Node implements Comparable<Node>{
         this.bound = parent.bound;
     }
 
-    public void bound(List<Item> items, int capacity){
+    public void bound(List<Item> items, int capacity) {
         double tempWeight = this.weight;
         this.bound = this.value;
         Item tempItem = null;

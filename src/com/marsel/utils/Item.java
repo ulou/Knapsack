@@ -3,7 +3,7 @@ package com.marsel.utils;
 /**
  * Created by Marcel on 11.12.2015.
  */
-public class Item implements Comparable{
+public class Item implements Comparable {
     public String name;
     public int weight;
     public int value;
@@ -44,6 +44,8 @@ public class Item implements Comparable{
         return ratio;
     }
 
+
+    // Comparator descending order
     @Override
     public int compareTo(Object o) {
         Item g2 = (Item) o;

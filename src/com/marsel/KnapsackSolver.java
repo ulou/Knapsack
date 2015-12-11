@@ -14,11 +14,4 @@ public abstract class KnapsackSolver {
         this.capacity = capacity;
     }
 
-//    public int getTotalValue(){
-//        int tempValue = 0;
-//        for(Item x:items)
-//            tempValue += x.getValue();
-//        return tempValue;
-//    }
-
 }

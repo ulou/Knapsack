@@ -1,6 +1,9 @@
 package com.marsel;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by Marcel on 11.12.2015.
@@ -57,18 +60,14 @@ public class BranchAndBound extends KnapsackSolver {
 
     public void show(Node node){
 
-        final String ANSI_RED = "\u001B[31m";
-        final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_GREEN = "\u001B[32m";
-
-        System.out.println(ANSI_GREEN + "List: " + ANSI_RESET);
+        System.out.println(Colors.GREEN + "List: " + Colors.RESET);
         for (Item x:items)
             System.out.println(x.getWeight() + " " + x.getValue());
 
-        System.out.println(ANSI_GREEN + "Solved list: " + ANSI_RESET);
+        System.out.println(Colors.GREEN + "Solved list: " + Colors.RESET);
         for (Item x:node.takenItems)
             System.out.println(x.getWeight() + " " + x.getValue());
 
-        System.out.println(ANSI_GREEN + "Solved list total value: " + node.getValue() + ANSI_RESET);
+        System.out.println(Colors.GREEN + "Solved list total value: " + node.getValue() + Colors.RESET);
     }
 }

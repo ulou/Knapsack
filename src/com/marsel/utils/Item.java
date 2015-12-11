@@ -4,24 +4,14 @@ package com.marsel.utils;
  * Created by Marcel on 11.12.2015.
  */
 public class Item implements Comparable {
-    public String name;
     public int weight;
     public int value;
     public float ratio;
 
-    public Item(String name, int weight, int value) {
-        this.name = name;
+    public Item(int weight, int value) {
         this.weight = weight;
         this.value = value;
         this.ratio = (float) value / (float) weight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getWeight() {

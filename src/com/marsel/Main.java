@@ -2,11 +2,21 @@ package com.marsel;
 
 import com.marsel.design.Colors;
 import com.marsel.solvers.BranchAndBound;
+import com.marsel.utils.Item;
 import com.marsel.utils.Knapsack;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
     private long start, stop;
+    public int numberOfItems;
+    public List<Item> tempItems = new ArrayList<Item>();
 
     public void start() {
         start = System.currentTimeMillis(); // start timing
@@ -17,35 +27,114 @@ public class Main {
     }
 
     public long Time() {
-        return stop - start;
+        return (stop - start);
     }
 
     public String end() {
-        return Colors.CYAN + "It took " + Long.toString(Time()) + " [ms]." + Colors.RESET; // print execution time
+        return Colors.GREEN + "Algorithm took: " + Long.toString(Time()) + " [ms]." + Colors.RESET; // print execution time
     }
 
-    public static void main(String[] args) {
+    public boolean loadFile(String fileName) {
+        Scanner fileScanner;
 
-        final int capacity = 10;
-        int[] weight = {7, 8, 6, 4, 3, 9};
-        int[] value = {75, 150, 250, 35, 10, 100};
+        try {
+            fileScanner = new Scanner(new File("src/inputs/" + fileName));
+        } catch (FileNotFoundException e) {
+            System.out.println("File " + fileName + " doesn't exist!");
+            e.printStackTrace();
+            return false;
+        }
 
-//        final int capacity = 30;
-//        int[] weight = {9, 13, 3, 5, 7, 8, 10, 3, 9 , 6};
-//        int[] value  = {116, 103, 84, 83, 54, 72, 89, 103, 43, 115};
+        this.numberOfItems = fileScanner.nextInt();
 
-//        final int capacity = 90;
-//        int[] weight = {9, 13, 3, 5, 7, 8, 10, 3, 9 , 6, 11, 7, 15, 5, 9, 12, 17, 13, 4, 7, 12, 8, 9, 17, 18, 2, 3, 11, 28, 15, 12, 16};
-//        int[] value  = {116, 103, 84, 83, 54, 72, 89, 103, 43, 115, 121, 90, 133, 60, 70, 122, 155, 75, 44, 56, 78, 78, 145, 51, 100, 13, 30, 66, 120, 125, 90, 150};
+        while (fileScanner.hasNextInt()) {
+            tempItems.add(new Item(fileScanner.nextInt(), fileScanner.nextInt()));
+        }
+        return true;
+    }
 
+    public int showMenu() {
+        int choose;
+        System.out.print(Colors.BLUE + "-------- Knapsack algorithm --------\n"
+                        + "1. Solve knapsack - from file\n"
+                        + "2. Solve knapsack - using random data\n"
+                        + "0. Exit\n"
+                        + "-----------------------------------\n" + Colors.RESET
+                        + "Choose: "
+        );
+        Scanner scan = new Scanner(System.in);
+        choose = scan.nextInt();
+        return choose;
+    }
+
+    public String files() {
+        List<String> results = new ArrayList<String>();
+        int choose;
+
+        Scanner scan = new Scanner(System.in);
+
+        File[] files = new File("src/inputs/").listFiles();
+        //If this pathname does not denote a directory, then listFiles() returns null.
+
+        System.out.println("-----------------------------------");
+
+        for (File file : files) {
+            if (file.isFile() && !file.isHidden()) {
+                results.add(file.getName());
+            }
+        }
+
+        for (String x : results)
+            System.out.println(Colors.BLUE + (results.indexOf(x) + 1) + ". " + x.toString() + Colors.RESET);
+
+        System.out.println("-----------------------------------");
+        System.out.print("Choose file: ");
+        choose = scan.nextInt();
+
+        return results.get(choose - 1);
+    }
+
+    public int setCapacity(int capacity) {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("-----------------------------------");
+        System.out.print("Input knapsack capacity: ");
+        capacity = scan.nextInt();
+        System.out.println("-----------------------------------");
+        return capacity;
+    }
+
+    public static void main(String[] args) throws IndexOutOfBoundsException, NullPointerException {
+
+        int capacity = 0;
         Main timer = new Main();
-        Knapsack bag = new Knapsack(weight, value, capacity);
-        BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
 
-        timer.start();
-        bnb.solve();
-        timer.stop();
+        while (true) {
+            switch (timer.showMenu()) {
+                case 1:
+                    if (timer.loadFile(timer.files())) {
+                        capacity = timer.setCapacity(capacity);
+                        Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                        BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
 
-        System.out.println(timer.end());
+                        timer.start();
+                        bnb.solve();
+                        timer.stop();
+
+                        System.out.println(timer.end());
+                    }
+                    break;
+                case 2:
+                    Random rand = new Random();
+                    for (int i = 0; i < 100; i++) {
+                        System.out.println(rand.nextInt(20) + " " + rand.nextInt(200));
+                    }
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Wrong choice. Try again!");
+            }
+        }
     }
 }

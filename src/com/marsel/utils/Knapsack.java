@@ -10,11 +10,16 @@ public class Knapsack {
     public List<Item> items;
     public int capacity;
 
+    public Knapsack(List<Item> items, int capacity) {
+        this.capacity = capacity;
+        this.items = items;
+    }
+
     public Knapsack(int[] weight, int[] value, int capacity) {
         this.capacity = capacity;
         this.items = new ArrayList<Item>();
         for (int i = 0; i < weight.length; i++) {
-            items.add(new Item("" + i, weight[i], value[i]));
+            items.add(new Item(weight[i], value[i]));
         }
     }
 

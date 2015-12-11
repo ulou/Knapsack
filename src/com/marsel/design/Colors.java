@@ -1,4 +1,4 @@
-package com.marsel;
+package com.marsel.design;
 
 /**
  * Created by Marcel on 11.12.2015.

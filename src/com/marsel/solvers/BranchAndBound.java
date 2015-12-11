@@ -1,4 +1,8 @@
-package com.marsel;
+package com.marsel.solvers;
+
+import com.marsel.design.Colors;
+import com.marsel.utils.Item;
+import com.marsel.utils.Node;
 
 import java.util.Collections;
 import java.util.LinkedList;

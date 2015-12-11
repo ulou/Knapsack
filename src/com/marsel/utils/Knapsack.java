@@ -1,4 +1,4 @@
-package com.marsel;
+package com.marsel.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;

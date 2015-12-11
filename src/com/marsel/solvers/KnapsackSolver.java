@@ -1,4 +1,6 @@
-package com.marsel;
+package com.marsel.solvers;
+
+import com.marsel.utils.Item;
 
 import java.util.List;
 

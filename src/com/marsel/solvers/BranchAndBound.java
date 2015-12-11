@@ -27,7 +27,7 @@ public class BranchAndBound extends KnapsackSolver {
 
         root.bound(this.items, this.capacity);
 
-        Queue<Node> queue = new LinkedList<Node>();//Queue<Node>();
+        Queue<Node> queue = new LinkedList<Node>();
         queue.add(root);
 
         while (queue.size() != 0) {

@@ -31,7 +31,7 @@ public class Main {
     }
 
     public String end() {
-        return Colors.GREEN + "Algorithm took: " + Long.toString(Time()) + " [ms]." + Colors.RESET; // print execution time
+        return Colors.YELLOW + "Algorithm took: " + Long.toString(Time()) + " [ms].\n\n" + Colors.RESET; // print execution time
     }
 
     public boolean loadFile(String fileName) {
@@ -55,11 +55,12 @@ public class Main {
 
     public int showMenu() {
         int choose;
-        System.out.print(Colors.BLUE + "-------- Knapsack algorithm --------\n"
+        System.out.print(Colors.BLUE + "-------- " + Colors.BLUE + "Knapsack algorithm"
+                        + Colors.BLUE + " -------\n"
                         + "1. Solve knapsack - from file\n"
                         + "2. Solve knapsack - using random data\n"
-                        + "0. Exit\n"
-                        + "-----------------------------------\n" + Colors.RESET
+                        + "0. Exit\n" + Colors.RESET
+                        + "-----------------------------------\n"
                         + "Choose: "
         );
         Scanner scan = new Scanner(System.in);
@@ -126,14 +127,14 @@ public class Main {
                     break;
                 case 2:
                     Random rand = new Random();
-                    for (int i = 0; i < 100; i++) {
-                        System.out.println(rand.nextInt(20) + " " + rand.nextInt(200));
+                    for (int i = 0; i < 500; i++) {
+                        System.out.println((rand.nextInt(20) + 2) + " " + (rand.nextInt(200) + 5));
                     }
                     break;
                 case 0:
                     return;
                 default:
-                    System.out.println("Wrong choice. Try again!");
+                    System.out.println(Colors.RED + "Wrong choice. Try again!" + Colors.RESET);
             }
         }
     }

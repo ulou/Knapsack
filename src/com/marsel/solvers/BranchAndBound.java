@@ -1,6 +1,5 @@
 package com.marsel.solvers;
 
-import com.marsel.design.Colors;
 import com.marsel.utils.Item;
 import com.marsel.utils.Node;
 
@@ -62,16 +61,4 @@ public class BranchAndBound extends KnapsackSolver {
         printSolution(best);
     }
 
-    public void printSolution(Node node) {
-
-        System.out.println(Colors.YELLOW + "All items list: " + Colors.RESET);
-        for (Item x : items)
-            System.out.println(x.getWeight() + " " + x.getValue());
-
-        System.out.println(Colors.YELLOW + "Solved list: " + Colors.RESET);
-        for (Item x : node.takenItems)
-            System.out.println(x.getWeight() + " " + x.getValue());
-
-        System.out.println(Colors.YELLOW + "Solved list value: " + node.getValue() + Colors.RESET);
-    }
 }

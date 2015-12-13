@@ -7,11 +7,11 @@ import java.util.List;
  * Created by Marcel on 11.12.2015.
  */
 public class Node {
-    public int level;
-    public List<Item> takenItems;
-    public int value;
-    public int weight;
-    public double bound;
+    public int level; // poziom drzewa
+    public List<Item> takenItems; // zabrane przedmioty (rozwiazania)
+    public int value; // wartosc całej gałęzi drzewa (wartosc przedmiotów)
+    public int weight; // waga
+    public double bound; // górna granica
 
     public Node() {
         this.takenItems = new ArrayList<Item>();
@@ -25,6 +25,7 @@ public class Node {
         this.bound = parent.bound;
     }
 
+    // funkcja odpowiadająca za policzenie granicy(ograniczenie wartości rozwiązania jakie możemy uzyskać po rozwinięciu danego wezła)
     public void bound(List<Item> items, int capacity) {
         double tempWeight = this.weight;
         this.bound = this.value;

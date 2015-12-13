@@ -2,6 +2,7 @@ package com.marsel;
 
 import com.marsel.design.Colors;
 import com.marsel.solvers.BranchAndBound;
+import com.marsel.solvers.Dynamic;
 import com.marsel.solvers.Greedy;
 import com.marsel.utils.Item;
 import com.marsel.utils.Knapsack;
@@ -10,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -42,7 +42,6 @@ public class Main {
             fileScanner = new Scanner(new File("src/inputs/" + fileName));
         } catch (FileNotFoundException e) {
             System.out.println("File " + fileName + " doesn't exist!");
-            e.printStackTrace();
             return false;
         }
 
@@ -130,9 +129,16 @@ public class Main {
                         }
                         break;
                     case 2:
-                        Random rand = new Random();
-                        for (int i = 0; i < 500; i++) {
-                            System.out.println((rand.nextInt(20) + 2) + " " + (rand.nextInt(200) + 5));
+                        if (timer.loadFile(timer.files())) {
+                            capacity = timer.setCapacity(capacity);
+                            Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                            Dynamic dynamic = new Dynamic(bag.getItems(), capacity);
+
+                            timer.start();
+                            dynamic.solve();
+                            timer.stop();
+
+                            System.out.println(timer.end());
                         }
                         break;
                     case 3:

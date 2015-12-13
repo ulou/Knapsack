@@ -19,21 +19,21 @@ public class BranchAndBound extends KnapsackSolver {
     }
 
     public void solve() {
-        Collections.sort(items);
+        Collections.sort(items); // sortujemy liste nierosnąco (descending order)
 
-        Node best = new Node();
-        Node root = new Node();
+        Node best = new Node(); // "lepszy" węzeł, metoda Best-First Search
+        Node root = new Node(); // korzeń
 
-        root.bound(this.items, this.capacity);
+        root.bound(this.items, this.capacity); // obliczamy granice(ograniczenia) dla wartośći rozwiązania, które możemy uzyskać z potomków danego węzła
 
-        Queue<Node> queue = new LinkedList<Node>();
-        queue.add(root);
+        Queue<Node> queue = new LinkedList<Node>(); // kolejka priorytetowa
+        queue.add(root); // dodajemy korzen drzewa do kolejki
 
         while (queue.size() != 0) {
             Node node = queue.poll();
 
 
-            if (node.bound > best.value && node.level < this.items.size() - 1) {
+            if (node.bound > best.value && node.level < this.items.size() - 1) { // 3węzeł jest obiecujący
                 Node with = new Node(node);
 
                 Item item = this.items.get(node.getLevel());

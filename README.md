@@ -8,7 +8,7 @@
 ## Todo list
 ### 1. General
 - [x] Implement Branch & Bound algorithm
-- [ ] Implement Dynamic algorithm
+- [x] Implement Dynamic algorithm
 - [ ] Implement Approximation algorithm
 - [x] Implement Greedy algorithm 
 - [x] Create read from file method

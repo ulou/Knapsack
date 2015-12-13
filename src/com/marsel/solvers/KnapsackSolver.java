@@ -25,6 +25,8 @@ public abstract class KnapsackSolver {
         return temp;
     }
 
+    public abstract void solve();
+
     public void printSolution(Node node) {
         System.out.println(Colors.YELLOW + "All items list: " + Colors.RESET);
         for (Item x : items)

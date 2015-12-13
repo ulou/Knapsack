@@ -39,6 +39,8 @@ public abstract class KnapsackSolver {
 
         System.out.println(Colors.YELLOW + "Solved list value: " + node.getValue() + Colors.RESET);
         System.out.println("-----------------------------------");
+        items.clear();
+        node.takenItems.clear();
     }
 
 }

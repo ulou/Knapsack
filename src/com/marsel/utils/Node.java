@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Marcel on 11.12.2015.
  */
-public class Node implements Comparable<Node> {
+public class Node {
     public int level;
     public List<Item> takenItems;
     public int value;
@@ -84,8 +84,8 @@ public class Node implements Comparable<Node> {
         this.level = level;
     }
 
-    @Override
-    public int compareTo(Node o) {
-        return (int) (o.bound - this.bound);
-    }
+//    @Override @Supression('unused')
+//    public int compareTo(Node o) {
+//        return (int) (o.bound - this.bound);
+//    }
 }

@@ -56,11 +56,12 @@ public class Main {
 
     public int showMenu() {
         int choose;
-        System.out.print(Colors.BLUE + "-------- " + Colors.BLUE + "Knapsack algorithm"
-                        + Colors.BLUE + " -------\n"
+        System.out.print("-------- " + Colors.WHITE + "Knapsack problem"
+                        + Colors.RESET + " -------\n" + Colors.BLUE
                         + "1. Solve using B&B\n"
                         + "2. Solve using Dynamic\n"
                         + "3. Solve using Greedy\n"
+                        + "4. Solve using Approximation\n\n"
                         + "0. Exit\n" + Colors.RESET
                         + "-----------------------------------\n"
                         + "Choose: "
@@ -112,44 +113,50 @@ public class Main {
         int capacity = 0;
         Main timer = new Main();
 
-        Knapsack bag = new Knapsack(timer.tempItems, capacity);
-
         while (true) {
-            switch (timer.showMenu()) {
-                case 1:
-                    if (timer.loadFile(timer.files())) {
-                        capacity = timer.setCapacity(capacity);
-                        BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
+            try {
+                switch (timer.showMenu()) {
+                    case 1:
+                        if (timer.loadFile(timer.files())) {
+                            capacity = timer.setCapacity(capacity);
+                            Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                            BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
 
-                        timer.start();
-                        bnb.solve();
-                        timer.stop();
+                            timer.start();
+                            bnb.solve();
+                            timer.stop();
 
-                        System.out.println(timer.end());
-                    }
-                    break;
-                case 2:
-                    Random rand = new Random();
-                    for (int i = 0; i < 500; i++) {
-                        System.out.println((rand.nextInt(20) + 2) + " " + (rand.nextInt(200) + 5));
-                    }
-                    break;
-                case 3:
-                    if (timer.loadFile(timer.files())) {
-                        capacity = timer.setCapacity(capacity);
-                        Greedy greedy = new Greedy(bag.getItems(), capacity);
+                            System.out.println(timer.end());
+                        }
+                        break;
+                    case 2:
+                        Random rand = new Random();
+                        for (int i = 0; i < 500; i++) {
+                            System.out.println((rand.nextInt(20) + 2) + " " + (rand.nextInt(200) + 5));
+                        }
+                        break;
+                    case 3:
+                        if (timer.loadFile(timer.files())) {
+                            capacity = timer.setCapacity(capacity);
+                            Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                            Greedy greedy = new Greedy(bag.getItems(), capacity);
 
-                        timer.start();
-                        greedy.solve();
-                        timer.stop();
+                            timer.start();
+                            greedy.solve();
+                            timer.stop();
 
-                        System.out.println(timer.end());
-                    }
-                    break;
-                case 0:
-                    return;
-                default:
-                    System.out.println(Colors.RED + "Wrong choice. Try again!" + Colors.RESET);
+                            System.out.println(timer.end());
+                        }
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        System.out.println(Colors.RED + "Wrong choice. Try again!" + Colors.RESET);
+                }
+            } catch (Exception e) {
+                System.out.println(Colors.RED + "Wrong input data. Try again!" + Colors.RESET);
+            } catch (OutOfMemoryError e) {
+                System.out.println(Colors.RED + "Capacity is too big. Out of memory. Try again!" + Colors.RESET);
             }
         }
     }

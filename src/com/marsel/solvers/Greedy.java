@@ -19,6 +19,7 @@ public class Greedy extends KnapsackSolver {
 
         Node node = new Node();
 
+        //noinspection Convert2streamapi
         for (Item x : items) {
             if (node.weight + x.getWeight() <= this.capacity) {
                 node.weight += x.getWeight();
@@ -28,7 +29,5 @@ public class Greedy extends KnapsackSolver {
         }
 
         printSolution(node);
-        items.clear();
-        node.takenItems.clear();
     }
 }

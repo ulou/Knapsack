@@ -16,6 +16,6 @@
 
 ### 2. Aesthetics and programming rules
 - [ ] Change access to variables
-- [ ] Handle exceptions
+- [x] Handle exceptions
 - [ ] Clean up code
 - [x] Order files

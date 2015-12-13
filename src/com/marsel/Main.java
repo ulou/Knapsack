@@ -2,6 +2,7 @@ package com.marsel;
 
 import com.marsel.design.Colors;
 import com.marsel.solvers.BranchAndBound;
+import com.marsel.solvers.Greedy;
 import com.marsel.utils.Item;
 import com.marsel.utils.Knapsack;
 
@@ -57,8 +58,9 @@ public class Main {
         int choose;
         System.out.print(Colors.BLUE + "-------- " + Colors.BLUE + "Knapsack algorithm"
                         + Colors.BLUE + " -------\n"
-                        + "1. Solve knapsack - from file\n"
-                        + "2. Solve knapsack - using random data\n"
+                        + "1. Solve using B&B\n"
+                        + "2. Solve using Dynamic\n"
+                        + "3. Solve using Greedy\n"
                         + "0. Exit\n" + Colors.RESET
                         + "-----------------------------------\n"
                         + "Choose: "
@@ -105,17 +107,18 @@ public class Main {
         return capacity;
     }
 
-    public static void main(String[] args) throws IndexOutOfBoundsException, NullPointerException {
+    public static void main(String[] args) throws IndexOutOfBoundsException, NullPointerException, OutOfMemoryError {
 
         int capacity = 0;
         Main timer = new Main();
+
+        Knapsack bag = new Knapsack(timer.tempItems, capacity);
 
         while (true) {
             switch (timer.showMenu()) {
                 case 1:
                     if (timer.loadFile(timer.files())) {
                         capacity = timer.setCapacity(capacity);
-                        Knapsack bag = new Knapsack(timer.tempItems, capacity);
                         BranchAndBound bnb = new BranchAndBound(bag.getItems(), capacity);
 
                         timer.start();
@@ -129,6 +132,18 @@ public class Main {
                     Random rand = new Random();
                     for (int i = 0; i < 500; i++) {
                         System.out.println((rand.nextInt(20) + 2) + " " + (rand.nextInt(200) + 5));
+                    }
+                    break;
+                case 3:
+                    if (timer.loadFile(timer.files())) {
+                        capacity = timer.setCapacity(capacity);
+                        Greedy greedy = new Greedy(bag.getItems(), capacity);
+
+                        timer.start();
+                        greedy.solve();
+                        timer.stop();
+
+                        System.out.println(timer.end());
                     }
                     break;
                 case 0:

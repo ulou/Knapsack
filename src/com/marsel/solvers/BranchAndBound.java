@@ -59,6 +59,8 @@ public class BranchAndBound extends KnapsackSolver {
         }
 
         printSolution(best);
+        items.clear();
+        best.takenItems.clear();
     }
 
 }

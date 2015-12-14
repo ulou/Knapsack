@@ -9,9 +9,7 @@ import com.marsel.utils.Knapsack;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -40,15 +38,20 @@ public class Main {
 
         try {
             fileScanner = new Scanner(new File("src/inputs/" + fileName));
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + fileName + " doesn't exist!");
-            return false;
+            this.numberOfItems = fileScanner.nextInt();
+
+            while (fileScanner.hasNext()) {
+                tempItems.add(new Item(fileScanner.nextInt(), fileScanner.nextInt()));
         }
-
-        this.numberOfItems = fileScanner.nextInt();
-
-        while (fileScanner.hasNextInt()) {
-            tempItems.add(new Item(fileScanner.nextInt(), fileScanner.nextInt()));
+        } catch (FileNotFoundException e) {
+//            System.out.println(Colors.RED + "File " + fileName + " doesn't exist!" + Colors.RESET);
+            return false;
+        } catch (InputMismatchException e) {
+            System.out.println(Colors.RED + "File " + fileName + " has the wrong format!" + Colors.RESET);
+            return false;
+        } catch (NoSuchElementException e) {
+            System.out.println(Colors.RED + "File " + fileName + " has the wrong format!" + Colors.RESET);
+            return false;
         }
         return true;
     }
@@ -92,9 +95,13 @@ public class Main {
 
         System.out.println("-----------------------------------");
         System.out.print("Choose file: ");
-        choose = scan.nextInt();
-
-        return results.get(choose - 1);
+        try {
+            choose = scan.nextInt();
+            return results.get(choose - 1);
+        } catch (Exception e) {
+            System.out.println(Colors.RED + "Wrong choice. Try again!" + Colors.RESET);
+        }
+        return "";
     }
 
     public int setCapacity(int capacity) {
@@ -160,9 +167,10 @@ public class Main {
                         System.out.println(Colors.RED + "Wrong choice. Try again!" + Colors.RESET);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println(Colors.RED + "Wrong input data. Try again!" + Colors.RESET);
             } catch (OutOfMemoryError e) {
-                System.out.println(Colors.RED + "Capacity is too big. Out of memory. Try again!" + Colors.RESET);
+                System.out.println(Colors.RED + "Out of memory. Capacity is too big. Try again!" + Colors.RESET);
             }
         }
     }

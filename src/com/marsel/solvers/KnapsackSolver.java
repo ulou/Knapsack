@@ -28,17 +28,19 @@ public abstract class KnapsackSolver {
     public abstract void solve();
 
     public void printSolution(Node node) {
-        System.out.println(Colors.YELLOW + "All items list: " + Colors.RESET);
-        for (Item x : items)
-            System.out.println(x.getWeight() + " " + x.getValue());
-
-        System.out.println(Colors.YELLOW + "All list value: " + getListValue() + Colors.RESET);
+        if (items.size() < 50) {
+            System.out.println(Colors.YELLOW + "All items list: " + Colors.RESET);
+            for (Item x : items)
+                System.out.println(x.getWeight() + " " + x.getValue());
+        }
 
         System.out.println("-----------------------------------");
         System.out.println(Colors.YELLOW + "Solved list: " + Colors.RESET);
         for (Item x : node.takenItems)
             System.out.println(x.getWeight() + " " + x.getValue());
 
+        System.out.println("-----------------------------------");
+        System.out.println(Colors.YELLOW + "All items list value: " + getListValue() + Colors.RESET);
         System.out.println(Colors.YELLOW + "Solved list value: " + node.getValue() + Colors.RESET);
         System.out.println("-----------------------------------");
         items.clear();

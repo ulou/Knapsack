@@ -33,7 +33,7 @@ public class BranchAndBound extends KnapsackSolver {
             Node node = queue.poll();
 
 
-            if (node.bound > best.value && node.level < this.items.size() - 1) { // 3węzeł jest obiecujący
+            if (node.bound > best.value && node.level < this.items.size() - 1) { // węzeł jest obiecujący
                 Node with = new Node(node);
 
                 Item item = this.items.get(node.getLevel());

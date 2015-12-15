@@ -46,5 +46,4 @@ public abstract class KnapsackSolver {
         items.clear();
         node.takenItems.clear();
     }
-
 }

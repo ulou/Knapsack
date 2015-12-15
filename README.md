@@ -12,9 +12,9 @@
 ### 1. General
 - [x] Implement Branch & Bound algorithm
 - [x] Implement Dynamic algorithm
-- [ ] Implement Approximation algorithm
+- [x] Implement Approximation algorithm (It's Greedy)
 - [x] Implement Greedy algorithm
-- [ ] Implement Brute-force algorithm
+- [x] Implement Brute-force algorithm
 - [x] Create read from file method
 - [ ] Prepare code to JavaDoc
 

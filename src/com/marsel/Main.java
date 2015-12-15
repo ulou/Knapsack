@@ -2,6 +2,7 @@ package com.marsel;
 
 import com.marsel.design.Colors;
 import com.marsel.solvers.BranchAndBound;
+import com.marsel.solvers.BruteForce;
 import com.marsel.solvers.Dynamic;
 import com.marsel.solvers.Greedy;
 import com.marsel.utils.Item;
@@ -63,7 +64,8 @@ public class Main {
                         + "1. Solve using B&B\n"
                         + "2. Solve using Dynamic\n"
                         + "3. Solve using Greedy\n"
-                        + "4. Solve using Approximation\n\n"
+                        + "4. Solve using Approximation\n"
+//                        + "5. Solve using BruteForce\n\n"
                         + "0. Exit\n" + Colors.RESET
                         + "-----------------------------------\n"
                         + "Choose: "
@@ -89,6 +91,7 @@ public class Main {
                 results.add(file.getName());
             }
         }
+        results.sort(Comparator.<String>naturalOrder());
 
         for (String x : results)
             System.out.println(Colors.BLUE + (results.indexOf(x) + 1) + ". " + x.toString() + Colors.RESET);
@@ -112,6 +115,7 @@ public class Main {
         capacity = scan.nextInt();
         System.out.println("-----------------------------------");
         return capacity;
+//        return 100;
     }
 
     public static void main(String[] args) throws IndexOutOfBoundsException, NullPointerException, OutOfMemoryError {
@@ -161,6 +165,29 @@ public class Main {
                             System.out.println(timer.end());
                         }
                         break;
+                    case 4:
+                        System.out.println(Colors.RED + "Not implemented yet." + Colors.RESET);
+                        break;
+                    case 5:
+                        if (timer.loadFile(timer.files())) {
+                            capacity = timer.setCapacity(capacity);
+                            Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                            BruteForce brute = new BruteForce(bag.getItems(), capacity);
+
+                            timer.start();
+                            brute.solve();
+                            timer.stop();
+
+                            System.out.println(timer.end());
+                        }
+                        break;
+                    case 6:
+                        Random rand = new Random();
+                        int size = 5000;
+                        System.out.println(size);
+                        for (int i = 0; i < size; i++) {
+                            System.out.println((rand.nextInt(30) + 5) + " " + (rand.nextInt(200) + 20));
+                        }
                     case 0:
                         return;
                     default:

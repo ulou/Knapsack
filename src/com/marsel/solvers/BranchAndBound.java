@@ -19,45 +19,43 @@ public class BranchAndBound extends KnapsackSolver {
     }
 
     public void solve() {
-        Collections.sort(items); // sortujemy liste nierosnąco (descending order)
+        Collections.sort(items); // sort list in descending order
 
-        Node best = new Node(); // "lepszy" węzeł, metoda Best-First Search
-        Node root = new Node(); // korzeń
+        Node best = new Node(); // better node, Best-First Search
+        Node root = new Node(); // root
 
-        root.bound(this.items, this.capacity); // obliczamy granice(ograniczenia) dla wartośći rozwiązania, które możemy uzyskać z potomków danego węzła
-
-        Queue<Node> queue = new LinkedList<Node>(); // kolejka priorytetowa
-        queue.add(root); // dodajemy korzen drzewa do kolejki
+        root.bound(this.items, this.capacity); // root bound
+        Queue<Node> queue = new LinkedList<>(); // priority queue
+        queue.add(root);
 
         while (queue.size() != 0) {
             Node node = queue.poll();
 
-            if (node.bound > best.value && node.level < this.items.size() - 1) { // węzeł jest obiecujący
+            if (node.getBound() > best.getValue() && node.getLevel() < this.items.size() - 1) {
                 Node with = new Node(node);
 
                 Item item = this.items.get(node.getLevel());
-                with.weight += item.weight;
+                with.setWeight(with.getWeight() + item.weight);
 
-                if (with.weight <= this.capacity) {
-                    with.takenItems.add(this.items.get(node.level));
-                    with.value += item.value;
+                if (with.getWeight() <= this.capacity) {
+                    with.getTakenItems().add(this.items.get(node.getLevel()));
+                    with.setValue(with.getValue() + item.value);
                     with.bound(this.items, this.capacity);
 
-                    if (with.value > best.value)
+                    if (with.getValue() > best.getValue())
                         best = with;
-                    if (with.bound > best.value)
+                    if (with.getBound() > best.getValue())
                         queue.add(with);
                 }
 
                 Node without = new Node(node);
                 without.bound(this.items, this.capacity);
 
-                if (without.bound > best.value)
+                if (without.getBound() > best.getValue())
                     queue.add(without);
             }
         }
 
         printSolution(best);
     }
-
 }

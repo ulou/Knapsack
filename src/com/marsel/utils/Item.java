@@ -18,22 +18,12 @@ public class Item implements Comparable {
         return weight;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
     public int getValue() {
         return value;
     }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public float getRatio() {
         return ratio;
     }
-
 
     // Comparator descending order
     @Override
@@ -44,7 +34,6 @@ public class Item implements Comparable {
             return -1;
         if (this.ratio < g2.ratio)
             return 1;
-
         return 0;
     }
 

@@ -1,7 +1,6 @@
 package com.marsel.solvers;
 
 import com.marsel.utils.Item;
-import com.marsel.utils.Node;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,17 +16,15 @@ public class Greedy extends KnapsackSolver {
     public void solve() {
         Collections.sort(items);
 
-        Node node = new Node();
-
         //noinspection Convert2streamapi
         for (Item x : items) {
-            if (node.weight + x.getWeight() <= this.capacity) {
-                node.weight += x.getWeight();
-                node.takenItems.add(x);
-                node.value += x.getValue();
+            if (solvedListWeight + x.getWeight() <= this.capacity) {
+                solvedListWeight += x.getWeight();
+                solvedList.add(x);
+                solvedListValue += x.getValue();
             }
         }
-
-        printSolution(node);
+        printSolution();
     }
+
 }

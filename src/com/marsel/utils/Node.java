@@ -7,11 +7,11 @@ import java.util.List;
  * Created by Marcel on 11.12.2015.
  */
 public class Node {
-    public int level; // poziom drzewa
-    public List<Item> takenItems; // zabrane przedmioty (rozwiazania)
-    public int value; // wartosc całej gałęzi drzewa (wartosc przedmiotów)
-    public int weight; // waga
-    public double bound; // górna granica
+    private int level; // deep level
+    private List<Item> takenItems; // solution, list of items
+    private int value; // node value
+    private int weight; // node weight
+    private double bound; // upper bound
 
     public Node() {
         this.takenItems = new ArrayList<Item>();
@@ -19,13 +19,12 @@ public class Node {
 
     public Node(Node parent) {
         this.level = parent.level + 1;
-        this.takenItems = new ArrayList<Item>(parent.takenItems);
+        this.takenItems = new ArrayList<>(parent.takenItems);
         this.value = parent.value;
         this.weight = parent.weight;
         this.bound = parent.bound;
     }
 
-    // funkcja odpowiadająca za policzenie granicy(ograniczenie wartości rozwiązania jakie możemy uzyskać po rozwinięciu danego wezła)
     public void bound(List<Item> items, int capacity) {
         double tempWeight = this.weight;
         this.bound = this.value;
@@ -49,10 +48,6 @@ public class Node {
         return bound;
     }
 
-    public void setBound(double bound) {
-        this.bound = bound;
-    }
-
     public int getWeight() {
         return weight;
     }
@@ -73,20 +68,9 @@ public class Node {
         return takenItems;
     }
 
-    public void setTakenItems(List<Item> takenItems) {
-        this.takenItems = takenItems;
-    }
-
     public int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
-//    @Override @Supression('unused')
-//    public int compareTo(Node o) {
-//        return (int) (o.bound - this.bound);
-//    }
 }

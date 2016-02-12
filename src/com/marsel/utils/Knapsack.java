@@ -26,9 +26,9 @@ public class Knapsack {
     public Knapsack() {
         this.items = new ArrayList<Item>();
     }
-
     public List<Item> getItems() {
         return items;
     }
+
 
 }

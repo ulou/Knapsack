@@ -1,7 +1,6 @@
 package com.marsel.solvers;
 
 import com.marsel.utils.Item;
-import com.marsel.utils.Node;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ public class BruteForce extends KnapsackSolver {
     }
 
     public void solve() {
-        Node best = new Node();
         int bestValue = 0;
         int bestPosition = 0;
 
@@ -22,7 +20,6 @@ public class BruteForce extends KnapsackSolver {
             int total = 0;
             int weight = 0;
             for (int j = 0; j < items.size(); j++) {
-                //jeżeli bit "not included" to pomin"
                 if (((i >> j) & 1) != 1)
                     continue;
                 total += items.get(j).value;
@@ -34,12 +31,13 @@ public class BruteForce extends KnapsackSolver {
             }
         }
         for (int j = 0; j < items.size(); j++) {
-            // jeżeli bit pasuje, wtedy dodaj
             if (((bestPosition >> j) & 1) == 1) {
-                best.takenItems.add(items.get(j));
-                best.value += items.get(j).value;
+                solvedList.add(items.get(j));
+                solvedListValue += items.get(j).value;
+                solvedListWeight += items.get(j).weight;
             }
         }
-        printSolution(best);
+        printSolution();
     }
+
 }

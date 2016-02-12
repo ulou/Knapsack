@@ -1,10 +1,7 @@
 package com.marsel;
 
 import com.marsel.design.Colors;
-import com.marsel.solvers.BranchAndBound;
-import com.marsel.solvers.BruteForce;
-import com.marsel.solvers.Dynamic;
-import com.marsel.solvers.Greedy;
+import com.marsel.solvers.*;
 import com.marsel.utils.Item;
 import com.marsel.utils.Knapsack;
 
@@ -43,9 +40,8 @@ public class Main {
 
             while (fileScanner.hasNext()) {
                 tempItems.add(new Item(fileScanner.nextInt(), fileScanner.nextInt()));
-        }
+            }
         } catch (FileNotFoundException e) {
-//            System.out.println(Colors.RED + "File " + fileName + " doesn't exist!" + Colors.RESET);
             return false;
         } catch (InputMismatchException e) {
             System.out.println(Colors.RED + "File " + fileName + " has the wrong format!" + Colors.RESET);
@@ -166,7 +162,17 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.println(Colors.RED + "Not implemented yet." + Colors.RESET);
+                        if (timer.loadFile(timer.files())) {
+                            capacity = timer.setCapacity(capacity);
+                            Knapsack bag = new Knapsack(timer.tempItems, capacity);
+                            FPTAS fptas = new FPTAS(bag.getItems(), capacity);
+
+                            timer.start();
+                            fptas.solve();
+                            timer.stop();
+
+                            System.out.println(timer.end());
+                        }
                         break;
                     case 5:
                         if (timer.loadFile(timer.files())) {
@@ -181,12 +187,13 @@ public class Main {
                             System.out.println(timer.end());
                         }
                         break;
+                    // generate random data
                     case 6:
                         Random rand = new Random();
-                        int size = 5000;
+                        int size = 55;
                         System.out.println(size);
                         for (int i = 0; i < size; i++) {
-                            System.out.println((rand.nextInt(30) + 5) + " " + (rand.nextInt(200) + 20));
+                            System.out.println((rand.nextInt(20) + 5) + " " + (rand.nextInt(200) + 20));
                         }
                     case 0:
                         return;

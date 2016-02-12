@@ -7,19 +7,21 @@
 
 :closed_book: [Knapsack problem - Brute Force](http://www.micsymposium.org/mics_2005/papers/paper102.pdf)
 
+:closed_book: [Knapsack problem - Approximation algorithm](http://www.asdpb.republika.pl/wyk78.pdf)
 
 ## Todo list
 ### 1. General
 - [x] Implement Branch & Bound algorithm
 - [x] Implement Dynamic algorithm
-- [x] Implement Approximation algorithm (It's Greedy)
+- [x] Implement Approximation algorithm 
 - [x] Implement Greedy algorithm
 - [x] Implement Brute-force algorithm
 - [x] Create read from file method
-- [ ] Prepare code to JavaDoc
+- [x] Prepare code to JavaDoc
+- [ ] Create JavaDoc
 
 ### 2. Aesthetics and programming rules
-- [ ] Change access to variables
+- [x] Change access to variables
 - [x] Handle exceptions
-- [ ] Clean up code
+- [x] Clean up code
 - [x] Order files

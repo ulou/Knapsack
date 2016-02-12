@@ -2,7 +2,6 @@ package com.marsel.solvers;
 
 import com.marsel.design.Colors;
 import com.marsel.utils.Item;
-import com.marsel.utils.Node;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,20 +18,20 @@ public class Dynamic extends KnapsackSolver {
     }
 
     public void solve() {
-        Node node = new Node();
         this.fillTable();
-        showTable();
+//        showTable();
         int col = this.capacity;
 
         for (int row = this.items.size(); row > 0; row--) {
             if (this.table[row][col] != this.table[row - 1][col]) {
-                node.takenItems.add(this.items.get(row - 1));
+                solvedList.add(this.items.get(row - 1));
                 col -= this.items.get(row - 1).weight;
-                node.value += this.items.get(row - 1).value;
+                solvedListValue += this.items.get(row - 1).value;
+                solvedListWeight += this.items.get(row - 1).weight;
             }
         }
-        Collections.sort(node.takenItems);
-        printSolution(node);
+        Collections.sort(solvedList);
+        printSolution();
     }
 
     public void fillTable() {
@@ -51,7 +50,7 @@ public class Dynamic extends KnapsackSolver {
     public void showTable() {
         for (int i = 0; i < this.items.size() + 1; i++) {
             for (int j = 0; j < this.capacity + 1; j++) {
-                System.out.format(Colors.GREEN + table[i][j] + Colors.GREEN + " ");
+                System.out.print(String.format("%3s", Colors.GREEN + table[i][j] + Colors.GREEN + " "));
             }
             System.out.println();
         }
